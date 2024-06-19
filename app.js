@@ -149,7 +149,7 @@ const main = async () => {
     const adapterDB = new MySQLAdapter({
         host: process.env.MYSQLHOST,
         user: process.env.MYSQLUSER,
-        database: process.env.MYSQLDATABASE,
+        database: process.env.MYSQL_DATABASE,
         password: process.env.MYSQLPASSWORD,
         port: process.env.MYSQLPORT || 37289,
     });
