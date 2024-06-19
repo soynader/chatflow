@@ -167,7 +167,7 @@ const main = async () => {
         await handleMessage(message, adapterProvider);
     });
 
-    QRPortalWeb({ port: process.env.APP_PORT || 3000 });
+    QRPortalWeb();
 };
 
 main();
