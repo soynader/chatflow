@@ -10,11 +10,11 @@ const EVENTS = require("@bot-whatsapp/bot").EVENTS;
 dotenv.config();
 
 const pool = mysql.createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT || 3306, // Usa el puerto 3306 por defecto si no se especifica
+    host: process.env.MYSQLHOST,
+    user: process.env.MYSQLUSER,
+    database: process.env.MYSQLDATABASE,
+    password: process.env.MYSQLPASSWORD,
+    port: process.env.MYSQLPORT || 3306, // Usa el puerto 3306 por defecto si no se especifica
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
@@ -147,11 +147,11 @@ const handleMessage = async (message, adapterProvider) => {
 
 const main = async () => {
     const adapterDB = new MySQLAdapter({
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        database: process.env.DB_NAME,
-        password: process.env.DB_PASSWORD,
-        port: process.env.DB_PORT || 3306,
+        host: process.env.MYSQLHOST,
+        user: process.env.MYSQLUSER,
+        database: process.env.MYSQLDATABASE,
+        password: process.env.MYSQLPASSWORD,
+        port: process.env.MYSQLPORT || 3306,
     });
 
     const adapterFlow = createFlow([]);  // No agregar flujos estáticos, se manejarán dinámicamente
