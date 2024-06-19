@@ -53,7 +53,8 @@ const getDefaultReply = async () => {
     const connection = await pool.getConnection();
     try {
         const [defaultReplyRow] = await connection.query('SELECT defaultreply FROM welcomes');
-        return defaultReplyRow[0].defaultreply;
+        const defaultReply = defaultReplyRow[0]?.defaultreply || '';
+        return defaultReply.trim(); // Trimming to handle any accidental spaces
     } finally {
         connection.release();
     }
@@ -135,10 +136,10 @@ const handleMessage = async (message, adapterProvider) => {
         // Si no hubo coincidencia, enviar el mensaje por defecto
         if (!matched) {
             const chatbotState = await getChatbotState(flows[0].chatbots_id); // Verifica el estado del chatbot del primer flujo
-            if (chatbotState === 'activo') {
+            if (chatbotState === 'activo' && defaultReply) { // Only send default reply if it's not empty
                 await adapterProvider.sendMessage(phoneNumber, defaultReply, { options: {} });
             } else {
-                console.log('El chatbot está inactivo y no se enviará el mensaje por defecto.');
+                console.log('El chatbot está inactivo o el mensaje por defecto está vacío y no se enviará el mensaje por defecto.');
             }
         }
     }
@@ -167,7 +168,7 @@ const main = async () => {
         await handleMessage(message, adapterProvider);
     });
 
-    QRPortalWeb({ port: process.env.APP_PORT || 3000 });
+    QRPortalWeb();
 };
 
 main();
