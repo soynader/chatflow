@@ -5,11 +5,11 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const pool = mysql.createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT || 3306, // Usa el puerto 3306 por defecto si no se especifica
+    host: process.env.MYSQLHOST,
+    user: process.env.MYSQLUSER,
+    database: process.env.MYSQLDATABASE,
+    password: process.env.MYSQLPASSWORD,
+    port: process.env.MYSQLPORT || 3306, // Usa el puerto 3306 por defecto si no se especifica
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
