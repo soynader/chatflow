@@ -7,6 +7,7 @@
         "prestart": "npx eslint . --no-ignore",
         "pre-copy": "cd .. && npm run  copy.lib base-baileys-mysql",
         "start": "concurrently \"node app.js\" \"node cleaner.js\""
+
     },
     "keywords": [],
     "dependencies": {
